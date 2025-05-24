@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Transcriber</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fab fa-youtube"></i> YouTube Video Transcriber</h1>
+            <p class="subtitle">Get perfect transcripts from any YouTube video</p>
+        </header>
+
+        <main>
+            <form id="transcribe-form">
+                <div class="input-group">
+                    <input type="text" id="youtube-url" 
+                           placeholder="Paste YouTube URL (e.g., https://www.youtube.com/watch?v=...)" 
+                           required>
+                    <button type="submit" id="transcribe-btn">
+                        <span class="button-text">Transcribe</span>
+                        <span class="spinner hidden"><i class="fas fa-spinner fa-spin"></i></span>
+                    </button>
+                </div>
+                <div class="examples">
+                    <span>Try:</span>
+                    <a href="#" class="example-link" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Short Video</a>
+                    <a href="#" class="example-link" data-url="https://www.youtube.com/watch?v=JGwWNGJdvx8">With Captions</a>
+                    <a href="#" class="example-link" data-url="https://www.youtube.com/watch?v=9bZkp7q19f0">Popular</a>
+                </div>
+            </form>
+
+            <div id="video-container" class="hidden">
+                <div class="section-header">
+                    <h2><i class="fas fa-video"></i> Video Preview</h2>
+                </div>
+                <div class="video-wrapper"></div>
+            </div>
+
+            <div id="status-container">
+                <div id="status-message" class="hidden"></div>
+                <div id="progress" class="hidden">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">Initializing... 0%</div>
+                    <div class="progress-details" id="progress-details"></div>
+                </div>
+            </div>
+
+            <div id="results-container" class="hidden">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-alt"></i> Transcript</h2>
+                    <div class="source-badge" id="source-badge"></div>
+                    <div class="action-buttons">
+                        <button id="copy-btn" class="icon-btn" title="Copy to clipboard">
+                            <i class="far fa-copy"></i>
+                        </button>
+                        <button id="download-btn" class="icon-btn" title="Download as TXT">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="transcription-result"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p><i class="fas fa-info-circle"></i> Videos with existing captions will process instantly. 
+            Longer videos may take several minutes.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
